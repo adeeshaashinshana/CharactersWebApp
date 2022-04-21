@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background: -webkit-linear-gradient(bottom, #011c1b, #3ca9df);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background-color: #86ddf3;
+  border-radius: 20px;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.75);
+  padding: 12px 44px;
+}
+
+.card-title {
+  font-size: calc(10px + 1.5vmin);
+}
+
+input[type="text"] {
+  margin-top: 5px;
+  height: 30px;
+  font-size: calc(10px + 1vmin);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 5px 20px;
+}
+
+input[type="text"]:focus {
+  border: 0px solid rgba(0, 0, 0, 0.2);
+}
+
+input[type="submit"] {
+  margin-top: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-size: calc(10px + 1vmin);
+  background: #0124d2;
+  border-radius: 20px;
+  border: 1px solid #01d28e;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+input[type="submit"]:hover {
+  background: #3ca9df;
+  color: white;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
