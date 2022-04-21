@@ -1,6 +1,7 @@
 @import "Styles/Common.css";
 @import "Styles/LoginPage.css";
 @import "Styles/TopBar.css";
+@import "Styles/CharacterCards.css";
 
 body {
   margin: 0;

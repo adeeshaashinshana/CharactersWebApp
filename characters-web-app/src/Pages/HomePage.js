@@ -1,10 +1,12 @@
 import React from "react";
-import TopBar from "../Components/TopBar";
+import TopBar from "../Layouts/TopBar";
+import CardContainer from "../Layouts/CardContainer";
 
 const HomePage = () => {
   return (
     <div>
       <TopBar />
+      <CardContainer />
     </div>
   );
 };

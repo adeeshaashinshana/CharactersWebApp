@@ -1,6 +1,7 @@
 .login-card {
   height: 40vh;
   margin: 6rem auto 8.1rem auto;
+  padding: 12px 44px;
   width: 300px;
   display: flex;
   flex-direction: column;
