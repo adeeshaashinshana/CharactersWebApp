@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import "../Styles/LoginPage.css";
+import React, { useState, useContext } from "react";
+import AuthContextProvider from "../Contexts/authContext";
 
 const LoginPage = () => {
-  const [errorMessage, setErrorMessage] = useState("");
+  // Maintain the login statues of user
+  const { setAppAuthContext } = useContext(AuthContextProvider);
+
   const userNameData = "xxx";
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const errors = {
     emptyName: "Username is required!",
@@ -25,6 +29,7 @@ const LoginPage = () => {
       setErrorMessage(errors.invalidName);
     } else {
       console.log("success");
+      setAppAuthContext(true);
     }
   };
 

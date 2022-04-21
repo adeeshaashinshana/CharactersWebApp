@@ -1,11 +1,16 @@
-import React from "react";
-import LoginPage from "../src/Pages/LoginPage";
+import React, { useContext } from "react";
+import AuthContextProvider from "./Contexts/authContext";
+import LoginPage from "./Pages/LoginPage";
+import HomePage from "./Pages/HomePage";
 
 const App = () => {
+  const { appAuthContext } = useContext(AuthContextProvider);
+
   return (
     <div className="App">
       <header className="App-header">
-        <LoginPage />
+        {!appAuthContext && <LoginPage />}
+        {appAuthContext && <HomePage />}
       </header>
     </div>
   );
