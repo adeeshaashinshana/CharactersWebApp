@@ -16,30 +16,32 @@ const CharacterCard = () => {
 
         <div className="basic-info">
           <table className="info-table">
-            <tr className="tr">
-              <td className="info-header">Name : </td>
-              <td className="info-value">Griffin</td>
-            </tr>
-            <tr className="tr">
-              <td className="info-header">Species :</td>
-              <td className="info-value">Griffin</td>
-            </tr>
-            <tr className="tr">
-              <td className="info-header">Gender : </td>
-              <td className="info-value">Griffin</td>
-            </tr>
-            <tr className="tr">
-              <td className="info-header">Origin :</td>
-              <td className="info-value">Griffin</td>
-            </tr>
-            <tr className="tr">
-              <td className="info-header">Dimension : </td>
-              <td className="info-value">Griffin</td>
-            </tr>
-            <tr className="tr">
-              <td className="info-header">Status :</td>
-              <td className="info-value">Griffin</td>
-            </tr>
+            <tbody>
+              <tr className="tr">
+                <td className="info-header">Name : </td>
+                <td className="info-value">Griffin</td>
+              </tr>
+              <tr className="tr">
+                <td className="info-header">Species :</td>
+                <td className="info-value">Griffin</td>
+              </tr>
+              <tr className="tr">
+                <td className="info-header">Gender : </td>
+                <td className="info-value">Griffin</td>
+              </tr>
+              <tr className="tr">
+                <td className="info-header">Origin :</td>
+                <td className="info-value">Griffin</td>
+              </tr>
+              <tr className="tr">
+                <td className="info-header">Dimension : </td>
+                <td className="info-value">Griffin</td>
+              </tr>
+              <tr className="tr">
+                <td className="info-header">Status :</td>
+                <td className="info-value">Griffin</td>
+              </tr>
+            </tbody>
           </table>
 
           {!isExpand && (
