@@ -37,7 +37,6 @@ input[type="text"]:focus {
 }
 
 input[type="submit"] {
-  margin-top: 10px;
   width: 100%;
   cursor: pointer;
   font-size: calc(10px + 1vmin);

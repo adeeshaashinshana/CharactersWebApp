@@ -9,13 +9,16 @@ const AuthContext = createContext(null);
 
 export const AuthContextProvider = ({ children }) => {
   const [appAuthContext, setAppAuthContext] = useState(false);
+  const [userNameContext, setUserNameContext] = useState("");
 
   const value = useMemo(
     () => ({
       appAuthContext,
       setAppAuthContext,
+      userNameContext,
+      setUserNameContext,
     }),
-    [appAuthContext]
+    [userNameContext, appAuthContext]
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

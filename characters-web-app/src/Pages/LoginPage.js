@@ -3,7 +3,8 @@ import AuthContextProvider from "../Contexts/authContext";
 
 const LoginPage = () => {
   // Maintain the login statues of user
-  const { setAppAuthContext } = useContext(AuthContextProvider);
+  const { setAppAuthContext, setUserNameContext } =
+    useContext(AuthContextProvider);
 
   const userNameData = "xxx";
 
@@ -16,7 +17,7 @@ const LoginPage = () => {
 
   const renderErrorMessage = <div className="error">{errorMessage}</div>;
 
-  const handleSubmit = (event) => {
+  const handleLogin = (event) => {
     //Prevent page reload
     event.preventDefault();
 
@@ -28,8 +29,8 @@ const LoginPage = () => {
     } else if (username.value !== userNameData) {
       setErrorMessage(errors.invalidName);
     } else {
-      console.log("success");
       setAppAuthContext(true);
+      setUserNameContext(username.value);
     }
   };
 
@@ -37,7 +38,7 @@ const LoginPage = () => {
     <div className="card login-card">
       <div className="card-title">
         <h2>LOGIN</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLogin}>
           <div className="input-container">
             <label>Username </label>
             <input type="text" name="username" required />
