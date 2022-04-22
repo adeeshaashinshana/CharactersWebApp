@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 const CharacterCard = ({ characterData }) => {
   CharacterCard.propTypes = {
     characterData: PropTypes.object.isRequired,
   };
 
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const [isExpand, setIsExpand] = useState(false);
+  const [clickedToken, setClickedToken] = useState("");
+
+  console.log("isExpand >>>", isExpand);
+  console.log("clickedToken >>>", clickedToken);
 
   //   *********** episode data descending sort by dates ***********
   const episodeDataProcess = () => {
@@ -33,6 +40,11 @@ const CharacterCard = ({ characterData }) => {
 
   return (
     <div className="card character-card">
+      <div className="fav-icon-container">
+        <div className="fav-icon" onClick={() => setIsFavorite(!isFavorite)}>
+          {isFavorite ? <FaHeart /> : <FaRegHeart />}
+        </div>
+      </div>
       <div className="character-card-body">
         <div className="image-container">
           <img src={characterData.image} alt="Avatar" className="img"></img>
@@ -72,7 +84,10 @@ const CharacterCard = ({ characterData }) => {
             <div className="see-more-button-container">
               <button
                 className="expand-button"
-                onClick={() => setIsExpand(true)}
+                onClick={() => {
+                  setIsExpand(true);
+                  setClickedToken(characterData.id);
+                }}
               >
                 See More
               </button>
@@ -81,7 +96,7 @@ const CharacterCard = ({ characterData }) => {
         </div>
       </div>
 
-      {isExpand && (
+      {clickedToken === characterData.id && (
         <div className="expand-container">
           <div>
             <div className="expand-title">Latest Episodes :</div>
@@ -91,7 +106,10 @@ const CharacterCard = ({ characterData }) => {
           <div className="see-less-button-container">
             <button
               className="expand-button"
-              onClick={() => setIsExpand(false)}
+              onClick={() => {
+                setIsExpand(false);
+                setClickedToken("");
+              }}
             >
               See Less
             </button>
