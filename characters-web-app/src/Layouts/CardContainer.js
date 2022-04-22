@@ -1,23 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import CharacterCard from "../Components/CharacterCard";
 import { GET_CHARACTERS } from "../APIs/Queries";
 
 const CardContainer = () => {
+  const [allCharacterData, setAllCharacterData] = useState(null);
+
   useQuery(GET_CHARACTERS, {
-    onCompleted: ({ characters, location, episodesByIds }) => {
-      console.log("characters >>>", characters);
-      console.log("location >>>", location);
-      console.log("episodesByIds >>>", episodesByIds);
+    onCompleted: ({ characters }) => {
+      setAllCharacterData(characters);
     },
     onError() {
       console.log("There is a error");
     },
   });
 
+  const renderCards = () => {
+    return (
+      <>
+        {allCharacterData.results.map((item) => (
+          <CharacterCard characterData={item} key={item.id} />
+        ))}
+      </>
+    );
+  };
+
   return (
     <div className="character-card-container">
-      <CharacterCard />
+      {allCharacterData ? renderCards() : <div> No any data </div>}
     </div>
   );
 };

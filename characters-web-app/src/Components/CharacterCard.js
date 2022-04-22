@@ -1,17 +1,41 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-const CharacterCard = () => {
+const CharacterCard = ({ characterData }) => {
+  CharacterCard.propTypes = {
+    characterData: PropTypes.object.isRequired,
+  };
+
   const [isExpand, setIsExpand] = useState(false);
+
+  //   *********** episode data descending sort by dates ***********
+  const episodeDataProcess = () => {
+    const episodeData = [...characterData.episode];
+
+    const sorter = (a, b) => {
+      return new Date(a.air_date) - new Date(b.air_date);
+    };
+    episodeData.reverse(sorter);
+
+    const sortedArray = episodeData.slice(0, 3);
+
+    return (
+      <ul className="extend-list">
+        {sortedArray.map((item) => (
+          <span key={item.id}>
+            <li> {item.name} </li>
+            <li className="extend-list-text"> {item.air_date} </li>
+          </span>
+        ))}
+      </ul>
+    );
+  };
 
   return (
     <div className="card character-card">
       <div className="character-card-body">
         <div className="image-container">
-          <img
-            src="https://picsum.photos/200/200"
-            alt="Avatar"
-            className="img"
-          ></img>
+          <img src={characterData.image} alt="Avatar" className="img"></img>
         </div>
 
         <div className="basic-info">
@@ -19,27 +43,27 @@ const CharacterCard = () => {
             <tbody>
               <tr className="tr">
                 <td className="info-header">Name : </td>
-                <td className="info-value">Griffin</td>
+                <td className="info-value"> {characterData.name} </td>
               </tr>
               <tr className="tr">
                 <td className="info-header">Species :</td>
-                <td className="info-value">Griffin</td>
+                <td className="info-value"> {characterData.species} </td>
               </tr>
               <tr className="tr">
                 <td className="info-header">Gender : </td>
-                <td className="info-value">Griffin</td>
+                <td className="info-value"> {characterData.gender} </td>
               </tr>
               <tr className="tr">
                 <td className="info-header">Origin :</td>
-                <td className="info-value">Griffin</td>
+                <td className="info-value"> {characterData.origin.name} </td>
               </tr>
               <tr className="tr">
-                <td className="info-header">Dimension : </td>
-                <td className="info-value">Griffin</td>
+                <td className="info-header">Dimension :</td>
+                <td className="info-value">{characterData.origin.dimension}</td>
               </tr>
               <tr className="tr">
                 <td className="info-header">Status :</td>
-                <td className="info-value">Griffin</td>
+                <td className="info-value"> {characterData.status} </td>
               </tr>
             </tbody>
           </table>
@@ -61,14 +85,7 @@ const CharacterCard = () => {
         <div className="expand-container">
           <div>
             <div className="expand-title">Latest Episodes :</div>
-            <ul className="extend-list">
-              <li>Coca Cola</li>
-              <li className="extend-list-text">Coca Cola</li>
-              <li>Coca Cola</li>
-              <li className="extend-list-text">Coca Cola</li>
-              <li>Coca Cola</li>
-              <li className="extend-list-text">Coca Cola</li>
-            </ul>
+            {episodeDataProcess()}
           </div>
 
           <div className="see-less-button-container">

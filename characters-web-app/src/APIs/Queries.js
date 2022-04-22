@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 // ------------- <<< Query for get all characters >>> -------------
 export const GET_CHARACTERS = gql`
   query GetCharacters {
-    characters(page: 2, filter: { name: "rick" }) {
+    characters {
       info {
         count
         pages
@@ -18,6 +18,7 @@ export const GET_CHARACTERS = gql`
         gender
         origin {
           name
+          dimension
         }
         status
         episode {
@@ -26,11 +27,6 @@ export const GET_CHARACTERS = gql`
           air_date
         }
       }
-    }
-    episodesByIds(ids: [23]) {
-      id
-      name
-      air_date
     }
   }
 `;
