@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,13 +7,10 @@ import {
   from,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import AuthContextProvider from "./Contexts/authContext";
 import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
 
 const App = () => {
-  const { appAuthContext } = useContext(AuthContextProvider);
-
   /* ================== Connect with the backend ================== */
   const errorLink = onError(({ networkError, graphQLErrors }) => {
     if (networkError || graphQLErrors) {
@@ -33,8 +30,11 @@ const App = () => {
     <ApolloProvider client={client}>
       <div className="App">
         <header className="App-header">
-          {!appAuthContext && <LoginPage />}
-          {appAuthContext && <HomePage />}
+          {sessionStorage.getItem("userName") === null ? (
+            <LoginPage />
+          ) : (
+            <HomePage />
+          )}
         </header>
       </div>
     </ApolloProvider>

@@ -1,7 +1,7 @@
 .character-card-container {
   width: 60vw;
   min-height: calc(100vh - (70px + 8vw));
-  margin-top: calc(70px + 4vw);
+  margin-top: calc(70px + 2vw);
   margin-bottom: 4vw;
   position: relative;
   z-index: 1;
@@ -130,4 +130,9 @@
   top: 2.5vw;
   left: 2.5vw;
   cursor: pointer;
+}
+
+.fav-button-container {
+  text-align: end;
+  margin-bottom: 2vw;
 }

@@ -1,22 +1,14 @@
-import React, { useContext } from "react";
-import AuthContextProvider from "../Contexts/authContext";
+import React from "react";
 
 const TopBar = () => {
-  // Maintain the login statues of user
-  const { setAppAuthContext, userNameContext, setUserNameContext } =
-    useContext(AuthContextProvider);
-
-  const handleLogout = (event) => {
-    //Prevent page reload
-    event.preventDefault();
-
-    setAppAuthContext(false);
-    setUserNameContext("");
+  const handleLogout = () => {
+    sessionStorage.clear();
+    window.location.reload();
   };
 
   return (
     <div className="top-bar">
-      <h2 className="user-name"> {userNameContext} </h2>
+      <h2 className="user-name"> {sessionStorage.getItem("userName")} </h2>
       <form onSubmit={handleLogout} className="logout-button">
         <input type="submit" value="Logout" />
       </form>

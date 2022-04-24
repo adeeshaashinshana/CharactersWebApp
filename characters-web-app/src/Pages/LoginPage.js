@@ -1,12 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
 import { GET_USER_BY_NAME } from "../APIs/Queries";
-import AuthContextProvider from "../Contexts/authContext";
 
 const LoginPage = () => {
-  // Maintain the login statues of user
-  const { setAppAuthContext, setUserNameContext } =
-    useContext(AuthContextProvider);
+  // const navigate = useNavigate();
 
   // --------------- get user data ---------------
   const [userNameData, setUserNameData] = useState("");
@@ -18,10 +16,9 @@ const LoginPage = () => {
         userName: userNameData,
       },
       onCompleted: ({ getUserByName }) => {
-        console.log("user >>>", getUserByName);
-
-        setAppAuthContext(true);
-        setUserNameContext(userNameData);
+        sessionStorage.setItem("userName", getUserByName.name);
+        sessionStorage.setItem("userFavData", getUserByName.savedCharacters);
+        window.location.reload();
       },
       onError() {
         console.log("There is a error");

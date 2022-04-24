@@ -4,11 +4,30 @@ import { gql } from "@apollo/client";
 export const GET_CHARACTERS = gql`
   query GetAllCharacters {
     getAllCharacters {
-      _id
+      characterID
       name
       image
       gender
       species
+      origin {
+        name
+        dimension
+      }
+      status
+    }
+  }
+`;
+
+// ------------- <<< Query for get all characters >>> -------------
+export const GET_FAVORITE_CHARACTERS = gql`
+  query GetFavoriteCharacters($characterIds: [Int]) {
+    getCharactersByIDs(characterIds: $characterIds) {
+      id
+      characterID
+      name
+      image
+      species
+      gender
       origin {
         name
         dimension
@@ -24,6 +43,7 @@ export const GET_USER_BY_NAME = gql`
     getUserByName(userName: $userName) {
       id
       name
+      savedCharacters
     }
   }
 `;
