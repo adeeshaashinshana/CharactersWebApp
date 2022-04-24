@@ -2,31 +2,28 @@ import { gql } from "@apollo/client";
 
 // ------------- <<< Query for get all characters >>> -------------
 export const GET_CHARACTERS = gql`
-  query GetCharacters {
-    characters {
-      info {
-        count
-        pages
-        next
-        prev
-      }
-      results {
-        id
-        image
+  query GetAllCharacters {
+    getAllCharacters {
+      _id
+      name
+      image
+      gender
+      species
+      origin {
         name
-        species
-        gender
-        origin {
-          name
-          dimension
-        }
-        status
-        episode {
-          id
-          name
-          air_date
-        }
+        dimension
       }
+      status
+    }
+  }
+`;
+
+// ------------- <<< Query for get user >>> -------------
+export const GET_USER_BY_NAME = gql`
+  query Query($userName: String) {
+    getUserByName(userName: $userName) {
+      id
+      name
     }
   }
 `;

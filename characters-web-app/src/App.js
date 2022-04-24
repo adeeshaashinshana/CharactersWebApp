@@ -22,7 +22,7 @@ const App = () => {
     }
   });
 
-  const BASE_URL = "https://rickandmortyapi.com/graphql";
+  const BASE_URL = "http://localhost:4000/graphql";
   const link = from([errorLink, new HttpLink({ uri: BASE_URL })]);
   const client = new ApolloClient({
     link: link,

@@ -7,8 +7,8 @@ const CardContainer = () => {
   const [allCharacterData, setAllCharacterData] = useState(null);
 
   useQuery(GET_CHARACTERS, {
-    onCompleted: ({ characters }) => {
-      setAllCharacterData(characters);
+    onCompleted: ({ getAllCharacters }) => {
+      setAllCharacterData(getAllCharacters);
     },
     onError() {
       console.log("There is a error");
@@ -18,7 +18,7 @@ const CardContainer = () => {
   const renderCards = () => {
     return (
       <>
-        {allCharacterData.results.map((item) => (
+        {allCharacterData.map((item) => (
           <CharacterCard characterData={item} key={item.id} />
         ))}
       </>

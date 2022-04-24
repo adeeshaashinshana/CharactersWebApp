@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import { useLazyQuery } from "@apollo/client";
+import { GET_USER_BY_NAME } from "../APIs/Queries";
 import AuthContextProvider from "../Contexts/authContext";
 
 const LoginPage = () => {
@@ -6,7 +8,26 @@ const LoginPage = () => {
   const { setAppAuthContext, setUserNameContext } =
     useContext(AuthContextProvider);
 
-  const userNameData = "xxx";
+  // --------------- get user data ---------------
+  const [userNameData, setUserNameData] = useState("");
+
+  const [getUserName, { loading: loadingUser }] = useLazyQuery(
+    GET_USER_BY_NAME,
+    {
+      variables: {
+        userName: userNameData,
+      },
+      onCompleted: ({ getUserByName }) => {
+        console.log("user >>>", getUserByName);
+
+        setAppAuthContext(true);
+        setUserNameContext(userNameData);
+      },
+      onError() {
+        console.log("There is a error");
+      },
+    }
+  );
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -17,7 +38,7 @@ const LoginPage = () => {
 
   const renderErrorMessage = <div className="error">{errorMessage}</div>;
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     //Prevent page reload
     event.preventDefault();
 
@@ -26,11 +47,10 @@ const LoginPage = () => {
     // Compare user info
     if (username.value === "" || username.value === null) {
       setErrorMessage(errors.emptyName);
-    } else if (username.value !== userNameData) {
-      setErrorMessage(errors.invalidName);
     } else {
-      setAppAuthContext(true);
-      setUserNameContext(username.value);
+      setUserNameData(username.value);
+
+      await getUserName();
     }
   };
 

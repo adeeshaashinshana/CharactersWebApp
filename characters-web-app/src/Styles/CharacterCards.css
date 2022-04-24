@@ -58,14 +58,16 @@
 
 .info-header {
   padding: 3px 0 3px 10px;
-  width: 30%;
+  width: 40%;
   font-weight: 700;
+  vertical-align: top;
 }
 
 .info-value {
   padding: 3px 10px 3px 0;
-  width: 70%;
+  width: 60%;
   font-weight: 500;
+  vertical-align: top;
 }
 
 .see-more-button-container {
@@ -120,12 +122,12 @@
 
 .fav-icon-container {
   position: absolute;
-  right: 0;
+  left: 0;
 }
 
 .fav-icon {
   position: absolute;
-  top: 1.5vw;
-  right: 1.5vw;
+  top: 2.5vw;
+  left: 2.5vw;
   cursor: pointer;
 }
