@@ -1,39 +1,21 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useLazyQuery, useMutation } from "@apollo/client";
-import { GET_USER_BY_NAME } from "../APIs/Queries";
+import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../APIs/Mutations";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
-const CharacterCard = ({
-  characterData,
-  getFavCharacters,
-  userFavoriteData,
-}) => {
+const CharacterCard = ({ characterData, favoriteCharacterIDs }) => {
   CharacterCard.propTypes = {
     characterData: PropTypes.object.isRequired,
-    // userFavoriteData: PropTypes.array.isRequired,
-    getFavCharacters: PropTypes.func,
-  };
-  CharacterCard.defaultProps = {
-    getFavCharacters: () => null,
+    favoriteCharacterIDs: PropTypes.array.isRequired,
   };
 
-  const getUserFavoriteData = sessionStorage.getItem("userFavData");
-  const userFavoriteDataArray = getUserFavoriteData
-    .split(",")
-    .map(function (item) {
-      return parseInt(item, 10);
-    });
-
+  let userFavoriteDataArray = [...favoriteCharacterIDs];
   const [isFavorite, setIsFavorite] = useState(false);
   const [isExpand, setIsExpand] = useState(false);
   const [clickedCharacter, setClickedCharacter] = useState("");
-  // const [updatedArray, setUpdatedArray] = useState([]);
-  // const userFavoriteDataArray = [userFavoriteData];
 
   useEffect(() => {
-    // getFavCharacters();
     userFavoriteDataArray.forEach((id) => {
       if (id === characterData.characterID) {
         setIsFavorite(true);
@@ -53,19 +35,17 @@ const CharacterCard = ({
         characterIds: userFavoriteDataArray,
       },
       async onCompleted({ updateUser }) {
-        // setUpdatedArray([]);
-        sessionStorage.setItem("userFavData", updateUser.savedCharacters);
-        // await getFavCharacters();
+        userFavoriteDataArray = [...updateUser.savedCharacters];
       },
-      // onError: () => {
-      // },
     }
   );
 
   const handleSetFav = (id) => {
     setIsFavorite(true);
-    userFavoriteDataArray.push(id);
-    handleFavCharacters();
+    if (!userFavoriteDataArray.includes(id)) {
+      userFavoriteDataArray.push(id);
+      handleFavCharacters();
+    }
   };
 
   const handleUnsetFav = (id) => {
