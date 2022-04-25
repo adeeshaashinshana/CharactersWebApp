@@ -17,7 +17,7 @@ const CardContainer = () => {
   const [errors, setErrors] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [characterPerPage] = useState(5);
+  const [characterPerPage] = useState(10);
 
   useQuery(GET_CHARACTERS, {
     fetchPolicy: "network-only",
