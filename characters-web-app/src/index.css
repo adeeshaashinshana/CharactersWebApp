@@ -2,6 +2,7 @@
 @import "Styles/LoginPage.css";
 @import "Styles/TopBar.css";
 @import "Styles/CharacterCards.css";
+@import "Styles/Pagination.css";
 
 body {
   margin: 0;

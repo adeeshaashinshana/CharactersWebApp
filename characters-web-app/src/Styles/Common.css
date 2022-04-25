@@ -60,3 +60,31 @@ input[type="submit"]:hover {
   color: red;
   font-size: 12px;
 }
+
+.loader-container {
+  height: 80vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  pointer-events: none;
+  font-size: 5vh;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loader {
+    animation: loader-spin infinite 1s linear;
+  }
+}
+
+@keyframes loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
