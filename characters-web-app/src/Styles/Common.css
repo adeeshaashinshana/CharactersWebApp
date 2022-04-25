@@ -1,0 +1,99 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background: -webkit-linear-gradient(bottom, #011c1b, #3ca9df);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  transition: 0.3s;
+  background-color: rgba(103, 186, 232, 0.5);
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+}
+
+.card-title {
+  font-size: calc(10px + 1.5vmin);
+}
+
+input[type="text"] {
+  margin-top: 5px;
+  height: 30px;
+  font-size: calc(10px + 1vmin);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 5px 20px;
+}
+
+input[type="text"]:focus {
+  border: 0px solid rgba(0, 0, 0, 0.2);
+}
+
+input[type="submit"] {
+  width: 100%;
+  cursor: pointer;
+  font-size: calc(10px + 1vmin);
+  background: #0124d2;
+  border-radius: 20px;
+  border: 1px solid #01d28e;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+input[type="submit"]:hover {
+  background: #3ca9df;
+  color: white;
+}
+
+.error {
+  color: rgb(152, 63, 63);
+  font-size: 12px;
+}
+
+.loader-container {
+  height: 80vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-loader-container {
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  pointer-events: none;
+  font-size: 5vh;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loader {
+    animation: loader-spin infinite 1s linear;
+  }
+}
+
+@keyframes loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,22 @@
+.login-card {
+  height: 40vh;
+  margin: 6rem auto 8.1rem auto;
+  padding: 12px 44px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

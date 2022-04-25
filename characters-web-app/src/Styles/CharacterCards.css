@@ -1,0 +1,154 @@
+.character-card-container {
+  width: 60vw;
+  min-height: calc(100vh - (70px + 8vw));
+  margin-top: calc(70px + 2vw);
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+}
+
+@media only screen and (max-width: 850px) {
+  .character-card-container {
+    width: 80vw;
+  }
+}
+
+.character-card {
+  border-radius: 10px;
+  min-height: 20vh;
+  margin-bottom: 10px;
+}
+
+.character-card-body {
+  display: flex;
+  align-items: stretch;
+}
+
+.image-container {
+  margin: 1.5vw;
+  margin-right: 0;
+  align-items: center;
+  height: 24vh;
+}
+
+.img {
+  border-radius: 10px;
+  height: 100%;
+}
+
+.basic-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 1.5vw;
+  justify-content: space-between;
+}
+
+.info-table {
+  table-layout: auto;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-collapse: collapse;
+}
+
+.tr:hover {
+  background-color: #809fff;
+}
+
+.info-header {
+  padding: 3px 0 3px 10px;
+  width: 40%;
+  font-weight: 700;
+  vertical-align: top;
+}
+
+.info-value {
+  padding: 3px 10px 3px 0;
+  width: 60%;
+  font-weight: 500;
+  vertical-align: top;
+}
+
+.see-more-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.see-less-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.expand-button {
+  background: #809fff;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin-top: 5px;
+  padding: 8px;
+}
+
+.expand-button:hover {
+  background: #0124d2;
+  color: #fff;
+}
+
+.expand-container {
+  padding: 1.5vw;
+  padding-top: 0;
+}
+
+.expand-title {
+  text-align: start;
+  font-weight: 700;
+}
+
+.extend-list {
+  text-align: left;
+  margin: 0;
+  padding-top: 5px;
+  list-style-type: square;
+  font-weight: 500;
+}
+
+.extend-list-text {
+  list-style-type: none;
+  font-weight: 400;
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+
+.fav-icon-container {
+  position: absolute;
+  left: 0;
+}
+
+.fav-icon {
+  position: absolute;
+  top: 2.5vw;
+  left: 2.5vw;
+  cursor: pointer;
+}
+
+.fav-button-container {
+  text-align: end;
+  margin-bottom: 2vw;
+}
+
+.fav-button {
+  background: #5874d1;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin-top: 5px;
+  padding: 8px;
+}
+
+.fav-button:hover {
+  background: #0124d2;
+  color: #fff;
+}
