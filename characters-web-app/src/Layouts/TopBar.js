@@ -8,7 +8,7 @@ const TopBar = () => {
 
   return (
     <div className="top-bar">
-      <h2 className="user-name"> {sessionStorage.getItem("userName")} </h2>
+      <h2 className="user-name">Hi "{sessionStorage.getItem("userName")}" !</h2>
       <form onSubmit={handleLogout} className="logout-button">
         <input type="submit" value="Logout" />
       </form>

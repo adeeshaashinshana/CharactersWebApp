@@ -16,6 +16,7 @@ const LoginPage = () => {
         userName: userNameData,
       },
       onCompleted: ({ getUserByName }) => {
+        sessionStorage.setItem("userID", getUserByName.id);
         sessionStorage.setItem("userName", getUserByName.name);
         sessionStorage.setItem("userFavData", getUserByName.savedCharacters);
         window.location.reload();

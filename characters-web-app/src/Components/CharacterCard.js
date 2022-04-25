@@ -1,19 +1,81 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { GET_USER_BY_NAME } from "../APIs/Queries";
+import { UPDATE_USER } from "../APIs/Mutations";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
-const CharacterCard = ({ characterData }) => {
+const CharacterCard = ({
+  characterData,
+  getFavCharacters,
+  userFavoriteData,
+}) => {
   CharacterCard.propTypes = {
     characterData: PropTypes.object.isRequired,
+    // userFavoriteData: PropTypes.array.isRequired,
+    getFavCharacters: PropTypes.func,
+  };
+  CharacterCard.defaultProps = {
+    getFavCharacters: () => null,
   };
 
+  const getUserFavoriteData = sessionStorage.getItem("userFavData");
+  const userFavoriteDataArray = getUserFavoriteData
+    .split(",")
+    .map(function (item) {
+      return parseInt(item, 10);
+    });
+
   const [isFavorite, setIsFavorite] = useState(false);
-
   const [isExpand, setIsExpand] = useState(false);
-  const [clickedToken, setClickedToken] = useState("");
+  const [clickedCharacter, setClickedCharacter] = useState("");
+  // const [updatedArray, setUpdatedArray] = useState([]);
+  // const userFavoriteDataArray = [userFavoriteData];
 
-  console.log("isExpand >>>", isExpand);
-  console.log("clickedToken >>>", clickedToken);
+  useEffect(() => {
+    // getFavCharacters();
+    userFavoriteDataArray.forEach((id) => {
+      if (id === characterData.characterID) {
+        setIsFavorite(true);
+      } else {
+        setIsFavorite(false);
+      }
+    });
+  }, []);
+
+  const [handleFavCharacters, { loading: favCharacterLoading }] = useMutation(
+    UPDATE_USER,
+    {
+      fetchPolicy: "network-only",
+      variables: {
+        userId: "6265b6aee8faf72dbcbe5e7c",
+        // userId: sessionStorage.getItem("userID"),
+        characterIds: userFavoriteDataArray,
+      },
+      async onCompleted({ updateUser }) {
+        // setUpdatedArray([]);
+        sessionStorage.setItem("userFavData", updateUser.savedCharacters);
+        // await getFavCharacters();
+      },
+      // onError: () => {
+      // },
+    }
+  );
+
+  const handleSetFav = (id) => {
+    setIsFavorite(true);
+    userFavoriteDataArray.push(id);
+    handleFavCharacters();
+  };
+
+  const handleUnsetFav = (id) => {
+    setIsFavorite(false);
+    const index = userFavoriteDataArray.indexOf(id);
+    if (index > -1) {
+      userFavoriteDataArray.splice(index, 1);
+    }
+    handleFavCharacters();
+  };
 
   //   *********** episode data descending sort by dates ***********
   const episodeDataProcess = () => {
@@ -23,7 +85,6 @@ const CharacterCard = ({ characterData }) => {
       return new Date(a.air_date) - new Date(b.air_date);
     };
     episodeData.reverse(sorter);
-
     const sortedArray = episodeData.slice(0, 3);
 
     return (
@@ -41,9 +102,25 @@ const CharacterCard = ({ characterData }) => {
   return (
     <div className="card character-card">
       <div className="fav-icon-container">
-        <div className="fav-icon" onClick={() => setIsFavorite(!isFavorite)}>
-          {isFavorite ? <FaHeart /> : <FaRegHeart />}
-        </div>
+        {isFavorite ? (
+          <div
+            className="fav-icon"
+            onClick={() => {
+              handleUnsetFav(characterData.characterID);
+            }}
+          >
+            <FaHeart />
+          </div>
+        ) : (
+          <div
+            className="fav-icon"
+            onClick={() => {
+              handleSetFav(characterData.characterID);
+            }}
+          >
+            <FaRegHeart />
+          </div>
+        )}
       </div>
       <div className="character-card-body">
         <div className="image-container">
@@ -86,7 +163,7 @@ const CharacterCard = ({ characterData }) => {
                 className="expand-button"
                 onClick={() => {
                   setIsExpand(true);
-                  setClickedToken(characterData.id);
+                  setClickedCharacter(characterData.id);
                 }}
               >
                 See More
@@ -96,11 +173,11 @@ const CharacterCard = ({ characterData }) => {
         </div>
       </div>
 
-      {clickedToken === characterData.id && (
+      {clickedCharacter === characterData.id && (
         <div className="expand-container">
           <div>
             <div className="expand-title">Latest Episodes :</div>
-            {episodeDataProcess()}
+            {/* {episodeDataProcess()} */}
           </div>
 
           <div className="see-less-button-container">
@@ -108,7 +185,7 @@ const CharacterCard = ({ characterData }) => {
               className="expand-button"
               onClick={() => {
                 setIsExpand(false);
-                setClickedToken("");
+                setClickedCharacter("");
               }}
             >
               See Less
