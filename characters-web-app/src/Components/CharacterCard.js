@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../APIs/Mutations";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaSpinner } from "react-icons/fa";
 
 const CharacterCard = ({ characterData, favoriteCharacterIDs }) => {
   CharacterCard.propTypes = {
@@ -78,98 +78,119 @@ const CharacterCard = ({ characterData, favoriteCharacterIDs }) => {
 
   return (
     <div className="card character-card">
-      <div className="fav-icon-container">
-        {isFavorite ? (
-          <div
-            className="fav-icon"
-            onClick={() => {
-              handleUnsetFav(characterData.characterID);
-            }}
-          >
-            <FaHeart />
+      <>
+        {favCharacterLoading ? (
+          <div className="card-loader-container">
+            <FaSpinner className="loader" />
+            <h3> Re-Fetching Data...</h3>
+            <h6> Please be patient...</h6>
           </div>
         ) : (
-          <div
-            className="fav-icon"
-            onClick={() => {
-              handleSetFav(characterData.characterID);
-            }}
-          >
-            <FaRegHeart />
-          </div>
-        )}
-      </div>
-      <div className="character-card-body">
-        <div className="image-container">
-          <img src={characterData.image} alt="Avatar" className="img"></img>
-        </div>
-
-        <div className="basic-info">
-          <table className="info-table">
-            <tbody>
-              <tr className="tr">
-                <td className="info-header">Name : </td>
-                <td className="info-value"> {characterData.name} </td>
-              </tr>
-              <tr className="tr">
-                <td className="info-header">Species :</td>
-                <td className="info-value"> {characterData.species} </td>
-              </tr>
-              <tr className="tr">
-                <td className="info-header">Gender : </td>
-                <td className="info-value"> {characterData.gender} </td>
-              </tr>
-              <tr className="tr">
-                <td className="info-header">Origin :</td>
-                <td className="info-value"> {characterData.origin.name} </td>
-              </tr>
-              <tr className="tr">
-                <td className="info-header">Dimension :</td>
-                <td className="info-value">{characterData.origin.dimension}</td>
-              </tr>
-              <tr className="tr">
-                <td className="info-header">Status :</td>
-                <td className="info-value"> {characterData.status} </td>
-              </tr>
-            </tbody>
-          </table>
-
-          {!isExpand && (
-            <div className="see-more-button-container">
-              <button
-                className="expand-button"
-                onClick={() => {
-                  setIsExpand(true);
-                  setClickedCharacter(characterData.id);
-                }}
-              >
-                See More
-              </button>
+          <>
+            <div className="fav-icon-container">
+              {isFavorite ? (
+                <div
+                  className="fav-icon"
+                  onClick={() => {
+                    handleUnsetFav(characterData.characterID);
+                  }}
+                >
+                  <FaHeart />
+                </div>
+              ) : (
+                <div
+                  className="fav-icon"
+                  onClick={() => {
+                    handleSetFav(characterData.characterID);
+                  }}
+                >
+                  <FaRegHeart />
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </div>
+            <div className="character-card-body">
+              <div className="image-container">
+                <img
+                  src={characterData.image}
+                  alt="Avatar"
+                  className="img"
+                ></img>
+              </div>
 
-      {clickedCharacter === characterData.id && (
-        <div className="expand-container">
-          <div>
-            <div className="expand-title">Latest Episodes :</div>
-            {episodeDataProcess()}
-          </div>
+              <div className="basic-info">
+                <table className="info-table">
+                  <tbody>
+                    <tr className="tr">
+                      <td className="info-header">Name : </td>
+                      <td className="info-value"> {characterData.name} </td>
+                    </tr>
+                    <tr className="tr">
+                      <td className="info-header">Species :</td>
+                      <td className="info-value"> {characterData.species} </td>
+                    </tr>
+                    <tr className="tr">
+                      <td className="info-header">Gender : </td>
+                      <td className="info-value"> {characterData.gender} </td>
+                    </tr>
+                    <tr className="tr">
+                      <td className="info-header">Origin :</td>
+                      <td className="info-value">
+                        {" "}
+                        {characterData.origin.name}{" "}
+                      </td>
+                    </tr>
+                    <tr className="tr">
+                      <td className="info-header">Dimension :</td>
+                      <td className="info-value">
+                        {characterData.origin.dimension}
+                      </td>
+                    </tr>
+                    <tr className="tr">
+                      <td className="info-header">Status :</td>
+                      <td className="info-value"> {characterData.status} </td>
+                    </tr>
+                  </tbody>
+                </table>
 
-          <div className="see-less-button-container">
-            <button
-              className="expand-button"
-              onClick={() => {
-                setIsExpand(false);
-                setClickedCharacter("");
-              }}
-            >
-              See Less
-            </button>
-          </div>
-        </div>
-      )}
+                {!isExpand && (
+                  <div className="see-more-button-container">
+                    <button
+                      className="expand-button"
+                      onClick={() => {
+                        setIsExpand(true);
+                        setClickedCharacter(characterData.id);
+                      }}
+                    >
+                      See More
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {clickedCharacter === characterData.id && (
+              <div className="expand-container">
+                <div>
+                  <div className="expand-title">Latest Episodes :</div>
+                  {episodeDataProcess()}
+                </div>
+
+                <div className="see-less-button-container">
+                  <button
+                    className="expand-button"
+                    onClick={() => {
+                      setIsExpand(false);
+                      setClickedCharacter("");
+                    }}
+                  >
+                    See Less
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </>
     </div>
   );
 };
