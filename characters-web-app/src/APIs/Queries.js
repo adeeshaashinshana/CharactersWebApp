@@ -14,6 +14,11 @@ export const GET_CHARACTERS = gql`
         dimension
       }
       status
+      episode {
+        id
+        name
+        air_date
+      }
     }
   }
 `;
@@ -33,6 +38,11 @@ export const GET_FAVORITE_CHARACTERS = gql`
         dimension
       }
       status
+      episode {
+        id
+        name
+        air_date
+      }
     }
   }
 `;

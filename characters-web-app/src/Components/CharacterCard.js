@@ -19,8 +19,6 @@ const CharacterCard = ({ characterData, favoriteCharacterIDs }) => {
     userFavoriteDataArray.forEach((id) => {
       if (id === characterData.characterID) {
         setIsFavorite(true);
-      } else {
-        setIsFavorite(false);
       }
     });
   }, []);
@@ -156,7 +154,7 @@ const CharacterCard = ({ characterData, favoriteCharacterIDs }) => {
         <div className="expand-container">
           <div>
             <div className="expand-title">Latest Episodes :</div>
-            {/* {episodeDataProcess()} */}
+            {episodeDataProcess()}
           </div>
 
           <div className="see-less-button-container">
