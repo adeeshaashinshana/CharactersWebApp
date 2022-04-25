@@ -1,12 +1,13 @@
 .pagination {
   display: flex;
+  flex-wrap: wrap;
   justify-content: end;
 }
 
 .pagination-page-item {
   list-style-type: none;
   float: left;
-  margin-bottom: 4vw;
+  /* margin-bottom: 4vw; */
 }
 
 .pagination-page-link {
