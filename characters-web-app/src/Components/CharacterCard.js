@@ -30,8 +30,7 @@ const CharacterCard = ({ characterData, favoriteCharacterIDs }) => {
     {
       fetchPolicy: "network-only",
       variables: {
-        userId: "6265b6aee8faf72dbcbe5e7c",
-        // userId: sessionStorage.getItem("userID"),
+        userId: sessionStorage.getItem("userID"),
         characterIds: userFavoriteDataArray,
       },
       async onCompleted({ updateUser }) {

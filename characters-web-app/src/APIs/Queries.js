@@ -39,7 +39,7 @@ export const GET_FAVORITE_CHARACTERS = gql`
 
 // ------------- <<< Query for get user >>> -------------
 export const GET_USER_BY_NAME = gql`
-  query Query($userName: String) {
+  query GetUserByName($userName: String) {
     getUserByName(userName: $userName) {
       id
       name
